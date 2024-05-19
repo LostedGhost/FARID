@@ -1,0 +1,107 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body class="bg-auth">
+
+ 
+  <section style="margin-top: 0px;">
+  </section>
+
+  <main id="main">
+
+    <section id="contact" class="contact">
+        <div class="container">
+  
+          <div class="row justify-content-center" data-aos="fade-up">
+  
+            <div class="col-lg-10">
+  
+              <div class="info-wrap bg-white">
+                <div class="row justify-content-center">
+                  <div class="col-lg-4 info mt-4 mt-lg-0">
+                    <a href="/"><i class="icofont-undo mx-3"></i></a>
+                    <h2>S'inscrire</h2>
+                  </div>
+                  <div class="col-lg-4 info mt-4 mt-lg-0">
+                    <a href="/login"><i class="icofont-redo mx-3"></i></a>
+                    <h2>Se connecter</h2>
+                  </div>
+                </div>
+              </div>
+  
+            </div>
+  
+          </div>
+  
+          <div class="row mt-5 justify-content-center" data-aos="fade-up">
+            <div class="col-lg-10">
+                {%if error%}
+                <div class="error-message my-3 bg-danger text-white text-center div-center" style="height: 100px;">
+                    {{error}}
+                </div>
+                {%endif%}
+              <form action="" method="POST" role="form" class="php-email-form" id="formLogin">
+                {%csrf_token%}
+                <div class="form-row justify-content-center">
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="nom" class="form-control" placeholder="Votre nom" data-rule="minlen:4" data-msg="Veuillez entrer au mois 4 caractères" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input type="text" name="prenom" class="form-control" placeholder="Votre prénom" data-rule="minlen:4" data-msg="Veuillez entrer au mois 4 caractères" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input type="date" name="date_naissance" class="form-control" placeholder="Date de naissance" data-rule="required" data-msg="Veuillez sélectionner votre date de naissance" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="col-md-6 form-group">
+                    <input type="email" class="form-control" name="email" placeholder="Votre email" data-rule="email" data-msg="Veuillez entrer un email valide" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <input class="form-check-input" type="radio" name="sexe" id="M" checked value="1">
+                    <label class="form-check-label">
+                      Masculin
+                    </label>
+                  </div>
+                  
+                  <div class="col-md-8 form-group">
+                    <input type="password" class="form-control" name="password" placeholder="Votre mot de passe" data-rule="minlen:4" data-msg="Veuillez entrer au mois 4 caractères" />
+                    <div class="validate"></div>
+                  </div>
+                  <div class="form-group col-md-3">
+                    <input class="form-check-input" type="radio" name="sexe" id="F" value="0">
+                    <label class="form-check-label">
+                      Féminin
+                    </label>
+                  </div>
+                <div class="col-md-8 form-group">
+                    <input type="password" class="form-control" name="re_password" placeholder="Rentrez encore le mot de passe" data-rule="minlen:4" data-msg="Veuillez entrer au mois 4 caractères" />
+                    <div class="validate"></div>
+                </div>
+                </div>
+                <div class="mb-3">
+                  <div class="loading">Chargement</div>
+                  <div class="error-message">
+                    {%if error%}
+                    {{error}}
+                    {%endif%}
+                  </div>
+                  <div class="sent-message">Mes félicitaions !! Vous êtes inscrit.</div>
+                </div>
+                <div class="text-center"><button type="submit">S'inscrire</button></div>
+              </form>
+            </div>
+  
+          </div>
+  
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/scripts.html"%}
+</body>
+
+</html>

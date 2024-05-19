@@ -1,0 +1,156 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body>
+
+  {%include "rendu/block/header.html" %}
+
+ 
+  <section id="hero" style="margin-top: 120px;">
+    <div id="heroCarousel" class="carousel slide carousel-fade" data-ride="carousel">
+
+      <div class="carousel-inner" role="listbox">
+
+        <!-- Slide 1 -->
+        <div id="slide1" class="carousel-item active">
+         
+        </div>
+
+        <!-- Slide 2 -->
+        <div id="slide2" class="carousel-item">
+          
+        </div>
+
+        <!-- Slide 3 -->
+        <div id="slide3" class="carousel-item">
+          
+        </div>
+
+      </div>
+
+      <a class="carousel-control-prev" href="#heroCarousel" role="button" data-slide="prev">
+        <span class="carousel-control-prev-icon icofont-simple-left" aria-hidden="true"></span>
+        <span class="sr-only">Previous</span>
+      </a>
+
+      <a class="carousel-control-next" href="#heroCarousel" role="button" data-slide="next">
+        <span class="carousel-control-next-icon icofont-simple-right" aria-hidden="true"></span>
+        <span class="sr-only">Next</span>
+      </a>
+
+      <ol class="carousel-indicators" id="hero-carousel-indicators"></ol>
+
+    </div>
+  </section>
+
+  <main id="main">
+
+    <!-- ======= a propos Section ======= -->
+    <section id="about-us" class="about-us">
+      <div class="container" data-aos="fade-up">
+
+        <div class="section-title">
+          <h2><strong>A la découverte du Bénin</strong></h2>
+        </div>
+
+        <div class="row content">
+          <div class="col-lg-12 pt-4 pt-lg-0" data-aos="fade-left">
+            <p>
+              <span class="ml-3">Le</span> <strong>Bénin</strong>, situé en Afrique de l’Ouest, est un pays aux multiples facettes. Son histoire est marquée par le 
+              royaume du Dahomey, qui prospéra entre le XVIIe et le XIXe siècle. Les Palais Royaux d’Abomey, inscrits au
+               patrimoine mondial de l’UNESCO, témoignent de cette époque glorieuse. <br> <span class="ml-3">Le</span> Bénin fut également un centre
+                majeur de la traite négrière, symbolisée par la Porte du Non-Retour à Ouidah. Aujourd’hui, le pays 
+                abrite une culture vibrante, où les langues locales, le vaudou et les religions traditionnelles africaines 
+                coexistent avec le christianisme et l’islam. <br> <span class="ml-3">L’art</span> béninois, célèbre pour ses sculptures en bronze et ses
+                 masques, perpétue des traditions séculaires. Entre les plages du golfe de Guinée et les plateaux intérieurs,
+               le Bénin offre une variété de paysages reflétant la diversité de ses peuples et de leurs modes de vie.
+            </p>
+          </div>
+        </div>
+
+      </div>
+    </section><!-- End About Us Section -->
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+        <div class="section-title" data-aos="fade-up">
+          <a href="/circuits">
+            <button data-aos="fade-up" class="text-center my-3 btn btn-primary">VOIR TOUS LES CIRCUITS</button>
+          </a>
+        </div>
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Tendance</h2>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">Tous</li>
+              <li data-filter=".filter-site">Sites touristiques</li>
+              <li data-filter=".filter-histoire">Histoire</li>
+              <li data-filter=".filter-ress">Ressources naturelles</li>
+              <li data-filter=".filter-event">Evènements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up">
+          {%for site in sites %}
+          <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-site">
+            <img src="{{site.first_pic.image.url}}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Site touristique</h4>
+              <p>{{site.nom}}</p>
+              <a href="{{site.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Site touristique"><i class="bx bx-show"></i></a>
+              <a href="/sites/view_site/{{site.id}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          {%endfor%}
+          {%for hist in histoires %}
+          <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-histoire">
+            <img src="{{hist.first_pic.image.url}}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Histoire</h4>
+              <p>{{hist.libelle}}</p>
+              <a href="{{hist.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Ssite touristique"><i class="bx bx-show"></i></a>
+              <a href="/histoires/view_hist/{{hist.id}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          {%endfor%}
+
+          {%for res in ressources %}
+          <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-ress">
+            <img src="{{res.first_pic.image.url}}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Resssource naturelle</h4>
+              <p>{{res.nom}}</p>
+              <a href="{{res.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Ressource naturelle"><i class="bx bx-show"></i></a>
+              <a href="/ressources/view_res/{{res.id}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          {%endfor%}
+          {%for event in events %}
+          <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-event">
+            <img src="{{event.first_pic.image.url}}" class="img-fluid" alt="">
+            <div class="portfolio-info">
+              <h4>Evènements</h4>
+              <p>{{event.nom}}</p>
+              <a href="{{event.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Evènement"><i class="bx bx-show"></i></a>
+              <a href="/events/view_event/{{event.id}}" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+            </div>
+          </div>
+          {%endfor%}
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/footer.html"%}
+</body>
+
+</html>

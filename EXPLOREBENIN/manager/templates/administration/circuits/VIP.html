@@ -1,0 +1,80 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+{% block title %} Liste des circuits {% endblock %}
+
+{% block body %}
+<h6 class="mb-3 text-uppercase p-3 shadow-sm bg-light-primary"><i class='lni lni-bookmark mx-3'></i>LISTE DES CIRCUITS</h6>
+
+				
+				<a class="btn btn-blue-s my-3 px-3 py-2" href="/circuit_VIP_add"><i class="lni lni-plus mr-2" style="font-size: 10px !important;"></i> Ajouter </a>
+
+				<div class="card">
+					<div class="card-body">
+						
+						<div class="table-responsive">
+							<table id="myDataTable" class="table table-striped table-bordered table-hover my-3">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Nom du circuit</th>
+                                        <th>Longueur</th>
+										<th>Coût</th>
+										<th class="text-end">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {% for cir in circuits %}
+                                    <tr {%if cir.hasnot_points %}class="table-danger"{%endif%}>
+										<td>{{cir.id}}</td>
+                                        <td>{{cir.nom}}</td>
+                                        <td>{{cir.longueur}}</td>
+										<td>{{cir.cout}} </td>
+                                        <td class="text-end">
+											<a href="/circuits/organize/{{cir.id}}">
+												<button data-elt-id=""
+												class="btn btn-warning btn-edit bx bx-network-chart" type="button"
+												id="organize" title="organiser" >
+												</button>
+												</a>
+                                                {%if not cir.hasnot_points%}
+                                                <a href="/circuit/{{cir.id}}">
+                                                    <button data-elt-id=""
+                                                    class="btn btn-success btn-edit bx bx-show" type="button"
+                                                    title="organiser" >
+                                                    </button>
+                                                    </a>
+                                                {%endif%}
+											<button class="btn btn-sm btn-edit btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#viewDesc{{cir.id}}"
+												title="Description" >
+												<span class="bx bx-text"></span>
+											</button>
+
+												<div class="modal fade col-5" id="viewDesc{{cir.id}}" aria-labelledby="#exampleScrollableModal" tabindex="-1" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-scrollable">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" >Description</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body text-center">{{cir.description}}</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+															</div>
+														</div>
+													</div>
+												</div>
+                                            <a href="/circuits/edit/{{cir.id}}">
+                                            <button data-elt-id=""
+											class="btn btn-sm btn-edit bx bx-pencil" type="button"
+											id="modifier" title="modifier" >
+											</button>
+                                            </a>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+{% endblock %}

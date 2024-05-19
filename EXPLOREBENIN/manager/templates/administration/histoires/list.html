@@ -1,0 +1,118 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+{% block title %} Liste des histoires {% endblock %}
+
+{% block body %}
+<h6 class="mb-3 text-uppercase p-3 shadow-sm bg-light-primary"><i class='lni lni-bookmark mx-3'></i>LISTE DES HIST</h6>
+
+				
+				<a class="btn btn-blue-s my-3 px-3 py-2" href="/histoires/add"><i class="lni lni-plus mr-2" style="font-size: 10px !important;"></i> Ajouter </a>
+
+				<div class="card">
+					<div class="card-body">
+						
+						<div class="table-responsive">
+							<table id="myDataTable" class="table table-striped table-bordered table-hover my-3">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Image représentative</th>
+										<th>Autres images</th>
+										<th>Nom</th>
+										<th class="text-end">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {% for hist in histoires %}
+                                    <tr>
+										<td>{{hist.id}}</td>
+										<td class="text-center">
+											<img src="{{hist.first_pic.image.url}}" alt="Image représentative" height="80">
+										</td>
+										<td class="text-center">
+											<button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#viewOthersImages{{hist.id}}"
+												title="Images" >
+												<span class="bx bx-image"></span>
+											</button>
+
+												<div class="modal fade col-5" id="viewOthersImages{{hist.id}}" aria-labelledby="#exampleScrollableModal" tabindex="-1" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-scrollable">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" >Autres images</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body text-center">
+																{%if not hist.other_pictures.exists%}
+																<img src="{% static 'assets-admin/images/not_image.png' %}" alt="Image représentative" height="100" class="mx-3">
+																<p class="text-center">Pas d'images</p>
+																{%endif%}
+																{% for pic in hist.other_pictures%}
+																<img src="{{pic.image.url}}" alt="Image représentative" height="100" class="mx-3">
+																{%endfor%}
+															</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+															</div>
+														</div>
+													</div>
+												</div>
+										</td>
+                                        <td>{{hist.libelle}}</td>
+                                        <td class="text-end">
+											<button class="btn btn-sm btn-primary" type="button" data-bs-toggle="modal" data-bs-target="#viewDesc{{hist.id}}"
+												title="Contenu de l'histoire" >
+												<span class="bx bx-text"></span>
+											</button>
+
+												<div class="modal fade col-5" id="viewDesc{{hist.id}}" aria-labelledby="#exampleScrollableModal" tabindex="-1" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-scrollable">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" >Contenu</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body text-center">{{hist.contenu}}</div>
+															<div class="modal-footer">
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Fermer</button>
+															</div>
+														</div>
+													</div>
+												</div>
+                                            <a href="/histoires/edit/{{hist.id}}">
+                                            <button data-elt-id=""
+											class="btn btn-sm btn-edit bx bx-pencil" type="button"
+											id="modifier" title="modifier" >
+											</button>
+                                            </a>
+                                            <button class="btn btn-sm btn-danger" type="button" data-bs-toggle="modal" data-bs-target="#deleteSite{{hist.id}}"
+												title="supprimer" >
+												<span class="bx bx-trash"></span>
+											</button>
+
+												<div class="modal fade col-5" id="deleteSite{{hist.id}}" aria-labelledby="#exampleScrollableModal" tabindex="-1" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-scrollable">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleScrollableModal">Confirmation</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body text-center">La suppression de cette histoire est irréversible. <br>Voulez-vous continuer ?</div>
+															<div class="modal-footer">
+																<a href="/histoires/delete/{{hist.id}}">
+																	<button type="button" class="btn btn-danger">Continuer</button>
+																</a>
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Annuler</button>
+															</div>
+														</div>
+													</div>
+												</div>
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+{% endblock %}

@@ -1,0 +1,49 @@
+{%load static%}
+
+<!-- ======= Header ======= -->
+<header id="header" class="fixed-top row">
+    <div class="col-md-12" style="text-align: center;">
+    <h1 class="logo mr-auto"><a href="/"><span>POSTE</span> <span class="text-success">-</span> TOURISME</a></h1>
+    </div>
+    <div class="col-md-12">
+      <nav class="nav-menu d-none d-lg-block">
+        <ul>
+          <li><a href="/">Accueil</a></li>
+          <li><a href="/site-touristique">Sites touristiques</a></li>
+          <li><a href="/histoires">Histoires</a></li>
+          <li><a href="/ressources">Ressources naturelles</a></li>
+          <li><a href="/events">Evènements</a></li>
+          <li><a href="/about">A propos de nous</a></li>
+          <li>
+            <form method="POST" class="row">
+                {% csrf_token %}
+              <input class="form-control col-md-10"  type="search" placeholder="Rechercher......" name="recherche">
+              <button type="submit" class="btn btn-primary btn-sm col-md-2"><i class="icofont-search"></i></button>
+            </form>
+          </li>
+          {%if not user%}
+          <li>
+            <a href="/signin">
+                <button class="btn btn-secondary">Se connecter</button>
+            </a>
+          </li>
+          {%else%}
+          <li>
+            <a href="/profil">
+              <img class="profile" src="{%if user.photo %}{{user.photo.url}} {%else%} {%static 'assets/img/profile.png' %} {%endif%}" alt="">
+                {{user.prenom_nom}}
+              </button>
+            </a>
+          </li>
+          <li>
+            <a href="/logout">
+              <button class="btn btn-danger"><i class="icofont-exit"></i></button>
+            </a>
+          </li>
+          {%endif%}
+        </ul>
+      </nav><!-- .nav-menu -->
+      
+
+    </div>
+  </header><!-- End Header -->

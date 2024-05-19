@@ -1,0 +1,83 @@
+/* styles.css */
+.custom-file-input {
+    display: none; /* Masquer l'input par défaut */
+  }
+  
+  .custom-file-label {
+    /*background-color: #4CAF50;*/
+    color: white;
+    padding: 10px 20px;
+    cursor: pointer;
+    border-radius: 5px;
+    text-align: center;
+    display: inline-block;
+    margin-bottom: 20px; /* Ajouter un espace entre le bouton et les images */
+  }
+  
+  #imagePreview {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 10px;
+  }
+  
+  .image-container {
+    position: relative;
+    display: inline-block;
+  }
+
+  .container-image{
+    position: relative;
+    display: inline-block;
+  }
+  
+  .image-container img {
+    width: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+
+  .container-image img {
+    height: 100px;
+    border: 1px solid #ddd;
+    border-radius: 5px;
+  }
+  
+  .image-container .remove-btn {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .container-image .remove-pt {
+    position: absolute;
+    top: 5px;
+    right: 5px;
+    background: red;
+    color: white;
+    border: none;
+    border-radius: 50%;
+    width: 20px;
+    height: 20px;
+    cursor: pointer;
+    display: flex;
+    align-items: center;
+    justify-content: center;
+  }
+
+  .bg-alert{
+    background-color: #f09393;
+  }
+  
+  .mw-200{
+    min-width: 500px;
+  }

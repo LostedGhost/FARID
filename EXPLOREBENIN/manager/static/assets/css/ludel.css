@@ -1,0 +1,44 @@
+.div-center {
+	display: flex;
+	justify-content: center;
+	align-items: center
+}
+
+
+#slide1{
+    background-image: url(/static/assets/img/soutenance/19.png);
+}
+
+#slide2{
+    background-image: url(/static/assets/img/soutenance/l.jpg);
+}
+
+#slide3{
+    background-image: url(/static/assets/img/soutenance/i.jpg);
+}
+
+.bg-auth{
+    background-image: url(/static/assets/img/bg.jpg);
+}
+
+.bg-white{
+    background-color: white;
+}
+
+.profile{
+    background-color: white;
+    border-radius: 50%;
+    width: 50px;
+    height: 50px;
+}
+
+.comment-img {
+    width: 40px;
+  }
+
+.float-left{
+    float: left;
+}
+.title{
+    font-weight: bold;
+}

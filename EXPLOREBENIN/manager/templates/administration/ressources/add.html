@@ -1,0 +1,66 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+{% block title %} Ajout de ressource naturelle {% endblock %}
+
+{% block body %}
+<h6 class="mb-3 text-uppercase p-3 shadow-sm bg-light-primary"><i class='lni lni-bookmark mx-3'></i>AJOUT DE RESSOURCE NATURELLE</h6>
+
+<div class="div-center">
+    <div class="card mt-4 col-md-10 div-center">
+        <div class="card-body">
+            <div class="border p-4 rounded">
+                <div class="card-title d-flex align-items-center">
+                    <div>
+                        <i class="bx bxs-bookmark  me-1 font-22 text-blue-sewar"></i>
+                    </div>
+                    <h5 class="mb-0 text-blue-sewar">Informations Générales</h5>
+                </div>
+                <hr />
+                <form id="form" name="myform" method="POST"  
+                    class="form-horizontal bg-form row g-3 mx-auto" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-md-8 mx-auto">
+                        <label class="col-sm-12 col-form-label">Nom <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-home'></i></span>
+                            <input type="text" class="form-control" name="nom" 
+                                placeholder="Nom de la ressource" required/> 
+                        </div>
+                    </div>
+
+                        <div class="col-md-8 mx-auto">
+                            <label class="col-sm-12 col-form-label">Localisation <span class="text-danger">*</span></label>
+                            <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-building' ></i></span>
+                                <select name="commune" id="inputSite" class="form-control single-select" required>
+                                    <option value="">Sélectionnez une commune</option>
+                                    {%for commune in communes%}
+                                    <option value="{{commune.id}}">{{commune.nom}}</option>
+                                    {%endfor%}
+                                </select>
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-3 mx-auto">
+                            <label class="col-sm-6 col-form-label text-uppercase">Description <span class="text-danger">*</span></label>
+                            <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-chat' ></i></span>
+                                <textarea class="form-control" name="description" rows="5" placeholder="Description de la ressource" required></textarea>
+                            </div>
+                        </div>
+                        <div class="col-md-8 mb-3 mx-auto">
+                            <label class="col-sm-6 col-form-label text-uppercase">Photo principale de la ressource <span class="text-danger">*</span> </label>
+                            <div class="input-group text-secondary">
+                                <input type="file" name="photo" accept=".png, .jpg" class="form-control" id="inputPhoto" placeholder="Photo du site" required/>
+                            </div>
+                        </div>
+                        
+                        <div class="form-group text-center">
+                            <button class="btn btn-blue-s mr-2" type="submit" id="enregistrer" 
+                            > Enregistrer
+                            </button >
+                            <a href="/ressources/list" class="btn btn-light border" type="button" id="fermer">Fermer
+                            </a>
+                        </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

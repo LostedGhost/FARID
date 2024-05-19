@@ -1,0 +1,70 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body>
+
+  {%include "rendu/block/header.html" %}
+
+ 
+  <section style="margin-top: 20px;">
+  </section>
+
+  <main id="main">
+
+    <!-- ======= Blog Section ======= -->
+    <section id="blog" class="blog">
+        <div class="container">
+  
+          <div class="row">
+  
+            <div class="col-lg-12 entries">
+                
+                <h1 class="text-uppercase text-center mb-3 text-success">Sites touristiques</h1>
+                {%if not sites.exists%}
+                <div class="entry-img text-center">
+                  <img src="{%static 'assets-admin/images/not_image.png' %}" alt="Pas de sites" class="img-fluid ">
+                  <br><p class="my-2">Pas de sites disponibles</p>
+                </div>
+                {%endif%}
+              {%for site in sites%}
+              <article class="entry" data-aos="fade-up">
+  
+                <div class="entry-img">
+                  <img src="{{site.first_pic.image.url}}" alt="{{site.nom}}" class="img-fluid">
+                </div>
+  
+                <h2 class="entry-title">
+                  <a href="#">{{site.nom}} </a>
+                </h2>
+  
+                <div class="entry-meta text-right">
+                  <ul class="text-right">
+                    <li class="d-flex align-items-center"><i class="icofont-comment"></i> <a href="#">{{site.commentaires.count}} Commentaire(s)</a></li>
+                  </ul>
+                </div>
+  
+                <div class="entry-content">
+                  <p>
+                    {{site.description}}
+                  </p>
+                  <div class="read-more">
+                    <a href="/sites/view_site/{{site.id}}">Voir Plus</a>
+                  </div>
+                </div>
+  
+              </article>
+              {%endfor%}
+  
+            </div><!-- End blog entries list -->
+  
+          </div>
+  
+        </div>
+      </section><!-- End Blog Section -->
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/footer.html"%}
+</body>
+
+</html>

@@ -1,0 +1,108 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+{% block title %} Organisation de circuit {% endblock %}
+
+{% block body %}
+<h6 class="mb-3 text-uppercase p-3 shadow-sm bg-light-primary"><i class='lni lni-bookmark mx-3'></i>ORGANISATION DE CIRCUIT</h6>
+
+<div class="div-center">
+    <div class="card mt-4 col-md-10 div-center">
+        <div class="card-body">
+            <div class="border p-4 rounded">
+                <div class="card-title d-flex align-items-center">
+                    <div>
+                        <i class="bx bxs-bookmark  me-1 font-22 text-blue-sewar"></i>
+                    </div>
+                    <h5 class="mb-0 text-blue-sewar">Informations Générales</h5>
+                </div>
+                <hr />
+                <form id="form" name="myform" method="POST"  
+                    class="form-horizontal bg-form row g-3 mx-auto" enctype="multipart/form-data">
+                    {% csrf_token %}
+                    <div class="col-md-8 mx-auto">
+                        <label class="col-sm-12 col-form-label">Sites touristiques <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-building' ></i></span>
+                            <select name="site" class="form-control single-select">
+                                <option value="">Sélectionnez un site touristique</option>
+                                {%for site in sites%}
+                                <option value="{{site.id}}">{{site.nom}}</option>
+                                {%endfor%}
+                            </select>
+                            <button class="input-group-text bg-primary text-white" type="submit"><i class='bx bx-plus' ></i>
+                            </button >
+                        </div>
+                    </div>
+                    <div class="col-md-8 mx-auto">
+                        <label class="col-sm-12 col-form-label">Ressource naturelle <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-building' ></i></span>
+                            <select name="res" class="form-control single-select">
+                                <option value="">Sélectionnez une ressource naturelle</option>
+                                {%for res in ressources%}
+                                <option value="{{res.id}}">{{res.nom}}</option>
+                                {%endfor%}
+                            </select>
+                            <button class="input-group-text bg-primary text-white" type="submit"><i class='bx bx-plus' ></i>
+                            </button >
+                        </div>
+                    </div>
+                    <div class="col-md-8 mx-auto">
+                        <label class="col-sm-12 col-form-label">Evènement <span class="text-danger">*</span></label>
+                        <div class="input-group"> <span class="input-group-text bg-transparent"><i class='bx bx-building' ></i></span>
+                            <select name="event" class="form-control single-select">
+                                <option value="">Sélectionnez un évènement</option>
+                                {%for event in events%}
+                                <option value="{{event.id}}">{{event.nom}}</option>
+                                {%endfor%}
+                            </select>
+                            <button class="input-group-text bg-primary text-white" type="submit"><i class='bx bx-plus' ></i>
+                            </button >
+                        </div>
+                    </div>
+                        
+                </form>
+                <div class="form-horizontal bg-form row g-3 mx-auto my-3">
+                  
+                {%for point in cir.points%}
+                        {%if point.site%}
+                        <div class="container-image">
+                            <img src="{{point.site.first_pic.image.url}}" alt="">
+                            <a href="/circuits/delete_point_circuit/{{point.id}}">
+                                <button class="remove-pt">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </a>
+                        </div>
+                        {%endif%}
+                        {%if point.res%}
+                        <div class="container-image">
+                            <img src="{{point.res.first_pic.image.url}}" alt="" class="div-center">
+                            <a href="/circuits/delete_point_circuit/{{point.id}}">
+                                <span class="remove-pt">
+                                    <i class="bx bx-trash"></i>
+                                </span>
+                            </a>
+                        </div>
+                        {%endif%}
+                        {%if point.event%}
+                        <div class="container-image">
+                            <img src="{{point.event.first_pic.image.url}}" alt="">
+                            <a href="/circuits/delete_point_circuit/{{point.id}}">
+                                <button class="remove-pt">
+                                    <i class="bx bx-trash"></i>
+                                </button>
+                            </a>
+                        </div>
+                        {%endif%}
+                        {%endfor%}
+                        
+                        <div class="form-group text-center">
+                            <a href="/save_organize/{{cir.id}}" class="btn btn-success border" type="button" id="fermer">Terminer
+                            </a>
+                        </div>
+                  
+                    </div>
+            </div>
+        </div>
+    </div>
+</div>
+{% endblock %}

@@ -1,0 +1,81 @@
+{% extends 'administration/base.html' %}
+{% load static %}
+{% block title %} Liste de mes réservations {% endblock %}
+
+{% block body %}
+<h6 class="mb-3 text-uppercase p-3 shadow-sm bg-light-primary"><i class='lni lni-bookmark mx-3'></i>LISTE DE mes réservations</h6>
+
+				
+				<div class="card">
+					<div class="card-body">
+						
+						<div class="table-responsive">
+							<table id="myDataTable" class="table table-striped table-bordered table-hover my-3">
+								<thead>
+									<tr>
+										<th>#</th>
+										<th>Nom du circuit</th>
+										<th>Montant payé</th>
+										<th>Statut</th>
+										<th>Date de réservation</th>
+										<th class="text-end">Actions</th>
+									</tr>
+								</thead>
+								<tbody>
+                                    {% for res in reservations %}
+                                    <tr>
+										<td>{{res.transaction_id}}</td>
+                                        <td>{{res.circuit.nom}}</td>
+                                        <td class="text-center">{{res.montant_paye}} FCFA</td>
+										<td class="text-center">
+                                            {%if  not res.statut %}
+                                            <span class="badge bg-primary">
+                                                Validé
+                                            </span>
+                                            {%else%}
+                                            <span class="badge bg-success">
+                                                Effectué
+                                            </span>
+                                            {%endif%}
+                                        </td>
+										<td class="text-center">
+											{{res.date_reservation}}
+										</td>
+                                        <td class="text-end">
+											{%if not res.statut %}
+                                            <button class="btn btn-sm btn-success bx bx-badge-check"  type="button" data-bs-toggle="modal" data-bs-target="#valideRes{{res.id}}"
+												title="valider" >
+											</button>
+                                            
+
+												<div class="modal fade col-5" id="valideRes{{res.id}}" aria-labelledby="#exampleScrollableModal" tabindex="-1" aria-hidden="true">
+													<div class="modal-dialog modal-dialog-scrollable">
+														<div class="modal-content">
+															<div class="modal-header">
+																<h5 class="modal-title" id="exampleScrollableModal">Confirmation</h5>
+																<button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+															</div>
+															<div class="modal-body text-center">Êtes-vous sûr de vouloir continuer ?</div>
+															<div class="modal-footer">
+																<a href="/cloture_res/{{res.id}}">
+																	<button type="button" class="btn btn-success">Oui</button>
+																</a>
+																<button type="button" class="btn btn-secondary" data-bs-dismiss="modal">Non</button>
+															</div>
+														</div>
+													</div>
+												</div>
+                                                {%else%}
+                                                <button class="btn btn-sm btn-secondary bx bx-badge-check"  type="button"
+												title="Achevée" disabled>
+											    </button>
+                                                {%endif%}
+                                        </td>
+                                    </tr>
+                                    {% endfor %}
+                                </tbody>
+							</table>
+						</div>
+					</div>
+				</div>
+{% endblock %}

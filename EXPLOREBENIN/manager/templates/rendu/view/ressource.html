@@ -1,0 +1,88 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body>
+
+  {%include "rendu/block/header.html" %}
+
+ 
+  <section style="margin-top: 20px;">
+  </section>
+
+  <main id="main">
+
+    <section id="portfolio-details" class="portfolio-details">
+        <div class="container" data-aos="fade-up">
+          <div class="portfolio-details-container">
+  
+            <div class="owl-carousel portfolio-details-carousel">
+                <img src="{{res.first_pic.image.url}}" alt="Image représentative" height="500">
+                {% for pic in res.other_pictures%}
+                <img src="{{pic.image.url}}" alt="Image représentative"  height="500">
+                {%endfor%}
+            </div>
+  
+            <div class="portfolio-info">
+              <h3>{{res.nom}}</h3>
+              <ul>
+                <li><strong>Nos circuits</strong>: <a href="/circuits">Cliquez-ici</a></li>
+              </ul>
+            </div>
+  
+          </div>
+  
+          <div class="portfolio-description">
+            <h2>Description</h2>
+            <p>
+              {{res.description}}
+            </p>
+          </div>
+          <div class="blog">
+            <div class="blog-comments" data-aos="fade-up">
+
+                <h4 class="comments-count">{{res.commentaires.count}} Commentaire(s)</h4>
+    
+                {%for comment in res.commentaires.all%}
+                <div id="comment.id" class="comment clearfix">
+                    <img src="{%if comment.user.photo%} {{comment.user.photo.url}} {%else%} {%static 'assets-admin/images/icons/profile.png' %} {%endif%}" class="comment-img  float-left" alt="">
+                    <h5>{{comment.user.prenom_nom}} </h5>
+                    <time datetime="{{comment.date_ajout_rep}}">{{comment.date_ajout}}</time>
+                    <p class="to_affiche">
+                        {{comment.contenu_rep }}
+                      {%if user.profil.id == 1%}
+                      <a href="/deleteCommentRes/{{comment.id}}">
+                        <i class="btn btn-danger bx bx-trash"></i>
+                      </a>
+                      {%endif%}
+                    </p>
+                    
+      
+                  </div>
+                {%endfor%}
+                <div class="reply-form col-8 mx-auto">
+                  <h4>Commentez</h4>
+                  <form method="POST" class="text-center">
+                    {% csrf_token %}
+                    <div class="row">
+                      <div class="col form-group">
+                        <textarea name="comment" class="form-control" placeholder="Votre commentaire*" rows="5"></textarea>
+                      </div>
+                    </div>
+                    <button type="submit" class="btn btn-primary center" {%if not user%} disabled {%endif%} >Poster</button>
+    
+                  </form>
+    
+                </div>
+    
+              </div>
+          </div>
+  
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/footer.html"%}
+</body>
+
+</html>

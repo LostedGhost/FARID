@@ -1,0 +1,104 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body>
+
+  {%include "rendu/block/header.html" %}
+
+ 
+  <section style="margin-top: 20px;">
+  </section>
+
+  <main id="main">
+
+    <section id="blog" class="blog">
+        <div class="container">
+  
+          <div class="row">
+  
+            <div class="col-lg-12 entries">
+                <div class="col-lg-12 d-flex align-items-stretch mt-4 mt-md-0 my-3 text-center div-center" data-aos="zoom-in" data-aos-delay="200">
+                    <div class="icon-box iconbox-orange ">
+                      <div class="icon">
+                      </div>
+                      <div id="amount" hidden>
+                        {{cir.cout}}
+                        </div>
+                        <div id="circuit_id" hidden>
+                            {{cir.id}}
+                        </div>
+                      <h4>Nom du circuit:<a href=""> {{cir.nom}}</a></h4>
+                      <p><span class="text-uppercase title">Description:</span> {{cir.description_rep}} <br></p>
+                      <p><span class="text-uppercase">coût</span>: {{cir.cout}} FCFA</p>
+                      <button class="btn btn-success" id="payement-kkia" {%if not user%} disabled {%endif%}>
+                          PAYER MAINTENANT
+                      </button>
+                      <p class="title text-danger">{%if not user%} CONNECTEZ-VOUS D'ABORD !!! {%endif%}</p>
+                    </div>
+                  </div>
+              
+                {%for point in cir.points%}
+                
+                {%if point.site%}
+                <article class="entry entry-single arrange" data-aos="fade-up" data-order="{{point.ordre}}">
+                <div class="entry-img">
+                  <img src="{{point.site.first_pic.image.url}}" alt="" class="img-fluid">
+                </div>
+  
+                <h2 class="entry-title text-center">
+                  {{point.site.nom}}
+                </h2>
+                <div class="entry-content">
+                    <p class="text-center">
+                        COMMUNE : {{point.site.commune.nom}}
+                    </p>
+                </div>
+                </article>
+                {%endif%}
+                {%if point.res%}
+                <article class="entry entry-single arrange" data-aos="fade-up" data-order="{{point.ordre}}">
+                <div class="entry-img">
+                  <img src="{{point.res.first_pic.image.url}}" alt="" class="img-fluid">
+                </div>
+  
+                <h2 class="entry-title text-center">
+                  {{point.res.nom}}
+                </h2>
+                <div class="entry-content">
+                    <p class="text-center">
+                        COMMUNE : {{point.res.commune.nom}}
+                    </p>
+                </div>
+                </article>
+                {%endif%}
+                {%if point.event%}
+                <article class="entry entry-single arrange" data-aos="fade-up" data-order="{{point.ordre}}">
+                <div class="entry-img">
+                  <img src="{{point.event.first_pic.image.url}}" alt="" class="img-fluid">
+                </div>
+  
+                <h2 class="entry-title text-center">
+                  {{point.event.nom}}
+                </h2>
+                <div class="entry-content">
+                    <p class="text-center">
+                        COMMUNE : {{point.event.commune.nom}}
+                    </p>
+                </div>
+                </article>
+                {%endif%}
+                {%endfor%}
+  
+            </div><!-- End blog entries list -->
+  
+          </div>
+  
+        </div>
+      </section>
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/footer.html"%}
+</body>
+
+</html>

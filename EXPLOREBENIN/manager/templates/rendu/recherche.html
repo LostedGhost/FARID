@@ -1,0 +1,95 @@
+{%load static %}
+{%include "rendu/block/head.html" %}
+
+<body>
+
+  {%include "rendu/block/header.html" %}
+
+ 
+  <section style="margin-top: 20px;">
+  </section>
+
+  <main id="main">
+
+    <!-- ======= Portfolio Section ======= -->
+    <section id="portfolio" class="portfolio">
+      <div class="container">
+
+        <div class="section-title" data-aos="fade-up">
+          <h2>Résultats</h2>
+        </div>
+
+        <div class="row" data-aos="fade-up">
+          <div class="col-lg-12 d-flex justify-content-center">
+            <ul id="portfolio-flters">
+              <li data-filter="*" class="filter-active">Tous</li>
+              <li data-filter=".filter-site">Sites touristiques</li>
+              <li data-filter=".filter-histoire">Histoire</li>
+              <li data-filter=".filter-ress">Ressources naturelles</li>
+              <li data-filter=".filter-event">Evènements</li>
+            </ul>
+          </div>
+        </div>
+
+        <div class="row portfolio-container" data-aos="fade-up">
+
+          {%if resultats.len == 0%}
+          <p class="div-center text-uppercase">Pas de résultats</p>
+          {%endif%}
+            {%for site in resultats.sites %}
+            <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-site">
+              <img src="{{site.first_pic.image.url}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Site touristique</h4>
+                <p>{{site.nom}}</p>
+                <a href="{{site.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Site touristique"><i class="bx bx-show"></i></a>
+                <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+            {%endfor%}
+            {%for hist in resultats.histoires %}
+            <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-histoire">
+              <img src="{{hist.first_pic.image.url}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Histoire</h4>
+                <p>{{hist.libelle}}</p>
+                <a href="{{hist.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Ssite touristique"><i class="bx bx-show"></i></a>
+                <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+            {%endfor%}
+  
+            {%for res in resultats.ressources %}
+            <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-ress">
+              <img src="{{res.first_pic.image.url}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Resssource naturelle</h4>
+                <p>{{res.nom}}</p>
+                <a href="{{res.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Ressource naturelle"><i class="bx bx-show"></i></a>
+                <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+            {%endfor%}
+            {%for event in resultats.events %}
+            <div class="col-lg-4 col-md-6 portfolio-item shuffle filter-event">
+              <img src="{{event.first_pic.image.url}}" class="img-fluid" alt="">
+              <div class="portfolio-info">
+                <h4>Evènements</h4>
+                <p>{{event.nom}}</p>
+                <a href="{{event.first_pic.image.url}}" data-gall="portfolioGallery" class="venobox preview-link" title="Evènement"><i class="bx bx-show"></i></a>
+                <a href="#" class="details-link" title="More Details"><i class="bx bx-link"></i></a>
+              </div>
+            </div>
+            {%endfor%}
+
+        </div>
+
+      </div>
+    </section><!-- End Portfolio Section -->
+
+  </main><!-- End #main -->
+
+  {%include "rendu/block/footer.html"%}
+</body>
+
+</html>
