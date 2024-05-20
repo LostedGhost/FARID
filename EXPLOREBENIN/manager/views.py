@@ -2,6 +2,17 @@ from django.shortcuts import render, redirect
 from manager.models import *
 
 # Create your views here.
+def handle404(request, exception):
+    user_id = request.session.get("user_id", None)
+    error = request.session.get('error')
+    user = None
+    if user_id is not None:
+        user = Utilisateur.objects.get(id=user_id)
+    return render(request, 'administration/error/404.html', {'user': user, 'error': error})
+
+def handle500(request):
+    return render(request, 'administration/error/500.html')
+
 def index(request):
     sites = SiteTouristique.objects.all()
     histoires = Histoire.objects.all()
