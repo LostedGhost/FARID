@@ -204,3 +204,15 @@ c = Commune(intitule="ZAGNANAGO", departement_id=11)
 c.save()
 c = Commune(intitule="ZOGBODOMEY", departement_id=11)
 c.save()
+
+######################################## PROFIL
+p = Profil(intitule="ADMINISTRATEUR")
+p.save()
+p = Profil(intitule="VISITEUR")
+p.save()
+
+######################################## UTILISATEUR
+u = Utilisateur(nom="HANTCHO", prenom="Farid", email="hantchof@gmail.com", date_naissance=text_to_date("2002-06-24"), password=chiffrement_cesar("0000"), sexe=True, profil_id=1)
+u.save()
+u = Utilisateur(nom="ADECHI", prenom="Bariatou", email="bariatouade@gmail.com", date_naissance=text_to_date("2002-06-24"), password=chiffrement_cesar("0000"), sexe=False, profil_id=1)
+u.save()
